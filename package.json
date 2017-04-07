@@ -1,7 +1,7 @@
 {
   "name": "codemod-imports-sort",
   "description": "Sort ES6 imports by type",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "bin": "./bin/codemod-imports-sort",
   "scripts": {
