@@ -5,10 +5,10 @@
   "license": "MIT",
   "main": "src/index.js",
   "files": [
-    "src",
-    "bin"
+    "src/index.js",
+    "bin/codemod-imports-sort"
   ],
-  "bin": "./bin/codemod-imports-sort",
+  "bin": "bin/codemod-imports-sort",
   "scripts": {
     "start": "./bin/codemod-imports-sort --"
   },
