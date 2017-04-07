@@ -1,7 +1,7 @@
 {
   "name": "codemod-imports-sort",
   "description": "Sort ES6 imports by type",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "MIT",
   "main": "src/index.js",
   "files": [
