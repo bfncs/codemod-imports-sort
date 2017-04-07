@@ -1,0 +1,13 @@
+{
+  "name": "codemod-imports-sort",
+  "description": "Sort ES6 imports by type",
+  "version": "0.0.1",
+  "main": "index.js",
+  "bin": "./bin/codemod-imports-sort",
+  "scripts": {
+    "start": "./bin/codemod-imports-sort --"
+  },
+  "dependencies": {
+    "jscodeshift": "^0.3.30"
+  }
+}

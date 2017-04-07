@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+${BASH_SOURCE%/*}/../node_modules/.bin/jscodeshift -t src/index.js "$@"
