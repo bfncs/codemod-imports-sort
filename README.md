@@ -1,6 +1,13 @@
 # CodeMod to sort ES6 imports by type
 
-Use this codemod to sort ES6 imports by type: external module imports before imports from parent folders before imports from sibling folders. Imports of the same type will be sorted alphabetically.
+Use this codemod to sort ES6 imports by type in this order:
+
+* internal Node.js modules before
+* external module imports before
+* local imports from parent folders before
+* local imports from sibling folders.
+
+Imports of the same type are sorted alphabetically.
 
 ## Install
 
@@ -21,6 +28,7 @@ Before:
 ```js
 import './index.css';
 import Beta from 'Beta';
+import fs from 'fs';
 import bar from '../bar';
 import './';
 import baz from './baz';
@@ -32,6 +40,7 @@ import App from './App';
 After:
 
 ```js
+import fs from 'fs';
 import Alpha from 'alpha';
 import Beta from 'Beta';
 import foo from '../../foo';

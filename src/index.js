@@ -1,3 +1,5 @@
+import isBuiltinModule from 'is-builtin-module';
+
 const CURRENT_DIRECTORY_PREFIX = './';
 const PARENT_DIRECTORY_PREFIX = '../';
 
@@ -14,6 +16,7 @@ const compareImports = (a, b) => {
   const bSrc = b.source.value;
 
   const importTypeMatchFunctions = [
+    isBuiltinModule,
     (path) => (/^\w+/.test(path)),
     (path) => (path.startsWith(PARENT_DIRECTORY_PREFIX)),
     (path) => (path === CURRENT_DIRECTORY_PREFIX),

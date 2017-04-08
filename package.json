@@ -13,6 +13,7 @@
     "start": "./bin/codemod-imports-sort --"
   },
   "dependencies": {
+    "is-builtin-module": "^1.0.0",
     "jscodeshift": "^0.3.30",
     "nomnom": "^1.8.1"
   }
