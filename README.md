@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/bfncs/codemod-imports-sort.svg?branch=master)](https://travis-ci.org/bfncs/codemod-imports-sort)
+
 # CodeMod to sort ES6 imports by type
 
 Use this codemod to sort ES6 imports by type in this order:
