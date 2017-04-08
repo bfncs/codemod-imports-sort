@@ -2,6 +2,7 @@
 
 'use strict';
 
+const appRoot = require('app-root-path');
 const Runner = require('jscodeshift/dist/Runner.js');
 
 const path = require('path');
@@ -87,7 +88,7 @@ const opts = require('nomnom')
   })
   .parse();
 
-const transform = 'src/index.js';
+const transform = appRoot + '/dist/index.js';
 
 Runner.run(
   path.resolve(transform),
