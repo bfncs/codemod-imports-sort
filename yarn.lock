@@ -2411,6 +2411,10 @@ jsbn@~0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
 
+jscodeshift-ava-tester@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/jscodeshift-ava-tester/-/jscodeshift-ava-tester-1.1.1.tgz#6c19631c380382ef248ea33afc30d98c023f0a6f"
+
 jscodeshift@^0.3.30:
   version "0.3.30"
   resolved "https://registry.yarnpkg.com/jscodeshift/-/jscodeshift-0.3.30.tgz#73f459d8fc3b3a80841991aeb7d24809cef6dfc5"
