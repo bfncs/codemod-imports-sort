@@ -4,7 +4,9 @@ const CURRENT_DIRECTORY_PREFIX = './';
 const PARENT_DIRECTORY_PREFIX = '../';
 
 export const isExternalModule = path =>
-  /^@?\w+/.test(path) && !isBuiltinModule(path);
+  /^@?[\w-]+$/.test(path) && !isBuiltinModule(path);
+export const isInternalModule = path =>
+  /^[\w-]+(\/[\w-]+)+$/.test(path);
 export const isLocalModuleFromParentDirectory = path =>
   path.startsWith(PARENT_DIRECTORY_PREFIX);
 export const isLocalModuleCurrentDirectoryIndex = path =>
@@ -25,6 +27,7 @@ export default (a, b) => {
   const importTypeMatchFunctions = [
     isBuiltinModule,
     isExternalModule,
+    isInternalModule,
     isLocalModuleFromParentDirectory,
     isLocalModuleCurrentDirectoryIndex,
     isLocalModuleFromSiblingDirectory,
