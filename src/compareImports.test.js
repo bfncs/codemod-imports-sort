@@ -91,7 +91,7 @@ test('isLocalModuleFromSiblingDirectory is true only for current directory index
   t.false(isLocalModuleFromSiblingDirectory(EXTERNAL_MODULE_B));
   t.false(isLocalModuleFromSiblingDirectory(EXTERNAL_SCOPED_MODULE));
   t.false(isLocalModuleFromParentDirectory(INTERNAL_MODULE_A));
-  t.false(isLocalModuleFromParentDirectory  (INTERNAL_MODULE_B));
+  t.false(isLocalModuleFromParentDirectory(INTERNAL_MODULE_B));
   t.false(isLocalModuleFromSiblingDirectory(LOCAL_PARENT_MODULE_A));
   t.false(isLocalModuleFromSiblingDirectory(LOCAL_PARENT_MODULE_B));
   t.false(isLocalModuleFromSiblingDirectory(LOCAL_INDEX_MODULE));
@@ -140,15 +140,15 @@ test('compareImports favors external modules before internal & local modules', t
   t.is(compareImports(LOCAL_INDEX_MODULE, EXTERNAL_MODULE_A), SECOND);
   t.is(compareImports(EXTERNAL_MODULE_A, LOCAL_SIBLING_MODULE_A), FIRST);
   t.is(compareImports(LOCAL_SIBLING_MODULE_A, EXTERNAL_MODULE_A), SECOND);
-})
+});
 
 test('compareImports favors internal modules before local modules', t => {
-	t.is(compareImports(INTERNAL_MODULE_A, LOCAL_PARENT_MODULE_A), FIRST);
-	t.is(compareImports(LOCAL_PARENT_MODULE_A, INTERNAL_MODULE_A), SECOND);
-	t.is(compareImports(INTERNAL_MODULE_A, LOCAL_INDEX_MODULE), FIRST);
-	t.is(compareImports(LOCAL_INDEX_MODULE, INTERNAL_MODULE_A), SECOND);
-	t.is(compareImports(INTERNAL_MODULE_A, LOCAL_SIBLING_MODULE_A), FIRST);
-	t.is(compareImports(LOCAL_SIBLING_MODULE_A, INTERNAL_MODULE_A), SECOND);
+  t.is(compareImports(INTERNAL_MODULE_A, LOCAL_PARENT_MODULE_A), FIRST);
+  t.is(compareImports(LOCAL_PARENT_MODULE_A, INTERNAL_MODULE_A), SECOND);
+  t.is(compareImports(INTERNAL_MODULE_A, LOCAL_INDEX_MODULE), FIRST);
+  t.is(compareImports(LOCAL_INDEX_MODULE, INTERNAL_MODULE_A), SECOND);
+  t.is(compareImports(INTERNAL_MODULE_A, LOCAL_SIBLING_MODULE_A), FIRST);
+  t.is(compareImports(LOCAL_SIBLING_MODULE_A, INTERNAL_MODULE_A), SECOND);
 });
 
 test('compareImports favors parent dir modules before other local modules', t => {
