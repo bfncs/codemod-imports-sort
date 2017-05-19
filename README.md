@@ -53,4 +53,22 @@ import baz from './baz';
 import './index.css';
 ```
 
+### Options
+
+#### `--sortConfig FILE.json`
+
+Optionally you can pass the path to a JSON file with a config to define the desired order of imports. The config should resemble the config for the [`import/order`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/order.md) plugin of eslint. For example to define to sort index imports first, then internal and external modules in a alphabetically sorted group and then sibling, parent and builtin modules together in a group, use this configuration:
+
+```json
+{
+    "groups": [
+        "index",
+        ["internal", "external"],
+        ["sibling", "parent", "builtin"]
+    ]
+}
+```
+
+Omitted types are implicitly grouped together as the last element
+
 *Built with [jscodeshift](https://github.com/facebook/jscodeshift).*
