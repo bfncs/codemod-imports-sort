@@ -1,10 +1,7 @@
 import compareImports from './compareImports';
 
 export default (file, api, options) => {
-
-  const config = options && options instanceof Object
-    ? options.sortConfig
-    : {};
+  const config = options && options instanceof Object ? options.sortConfig : {};
 
   const j = api.jscodeshift;
   const root = j(file.source);
@@ -12,7 +9,8 @@ export default (file, api, options) => {
   const declarations = root.find(j.ImportDeclaration);
   const sortedDeclarations = declarations
     .nodes()
-    .sort((a, b) => compareImports(a.source.value, b.source.value, config.groups));
+    .sort((a, b) =>
+      compareImports(a.source.value, b.source.value, config.groups));
 
   declarations.remove();
 
