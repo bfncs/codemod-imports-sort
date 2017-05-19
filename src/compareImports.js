@@ -86,12 +86,16 @@ export default (a, b, order = DEFAULT_ORDER) => {
     .map(
       group =>
         Array.isArray(group)
-          ? name =>
+          ? name => (
               group.reduce(
-                (acc, matcherName) =>
-                  acc === null ? matchers[matcherName] : acc,
+                (acc, matcherName) => (
+                  acc === true
+                    ? true
+                    : matchers[matcherName](name)
+                ),
                 null,
               )
+          )
           : matchers[group],
     )
     .reduce(

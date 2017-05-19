@@ -5,6 +5,7 @@
 const appRoot = require('app-root-path');
 const Runner = require('jscodeshift/dist/Runner.js');
 
+const fs = require('fs');
 const path = require('path');
 const pkg = require('../package.json');
 const opts = require('nomnom')
@@ -16,6 +17,9 @@ const opts = require('nomnom')
       list: true,
       metavar: 'FILE',
       required: true
+    },
+    sortConfig: {
+      help: 'JSON File with imports sort config',
     },
     cpus: {
       abbr: 'c',
@@ -90,8 +94,19 @@ const opts = require('nomnom')
 
 const transform = appRoot + '/dist/index.js';
 
+let sortConfig;
+const sortConfigPath = opts.sortConfig;
+if (sortConfigPath) {
+  try {
+    sortConfig = JSON.parse(fs.readFileSync(path.resolve(sortConfigPath)));
+  } catch (err) {
+    console.error(`Unable to read sort config file ${sortConfigPath}.`, err);
+    process.exit(1);
+  }
+}
+
 Runner.run(
   path.resolve(transform),
   opts.path,
-  Object.assign({}, opts, { transform: transform, babel: true })
+  Object.assign({}, Object.assign(opts, { sortConfig: sortConfig }), { transform: transform, babel: true })
 );

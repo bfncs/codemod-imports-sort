@@ -196,3 +196,72 @@ test('compareImports sorts imports of the same type alphabetically', t => {
   t.is(compareImports(LOCAL_SIBLING_MODULE_A, LOCAL_SIBLING_MODULE_B), FIRST);
   t.is(compareImports(LOCAL_SIBLING_MODULE_B, LOCAL_SIBLING_MODULE_A), SECOND);
 });
+
+test('compareImports applies custom order', t => {
+  const ORDER = [
+    'index',
+    'sibling',
+    'parent',
+    'internal',
+    'external',
+    'builtin'
+  ];
+  t.is(compareImports(LOCAL_INDEX_MODULE, LOCAL_SIBLING_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(LOCAL_INDEX_MODULE, LOCAL_PARENT_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(LOCAL_INDEX_MODULE, INTERNAL_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(LOCAL_INDEX_MODULE, EXTERNAL_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(LOCAL_INDEX_MODULE, BUILTIN_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(LOCAL_SIBLING_MODULE_A, LOCAL_PARENT_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(LOCAL_SIBLING_MODULE_A, INTERNAL_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(LOCAL_SIBLING_MODULE_A, EXTERNAL_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(LOCAL_SIBLING_MODULE_A, BUILTIN_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(LOCAL_PARENT_MODULE_A, INTERNAL_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(LOCAL_PARENT_MODULE_A, EXTERNAL_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(LOCAL_PARENT_MODULE_A, BUILTIN_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(INTERNAL_MODULE_A, EXTERNAL_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(INTERNAL_MODULE_A, BUILTIN_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(EXTERNAL_MODULE_A, BUILTIN_MODULE_A, ORDER), FIRST);
+});
+
+test('compareImports applies groups in custom order', t => {
+  const ORDER = [
+    'index',
+    ['internal', 'external'],
+    ['sibling', 'parent', 'builtin'],
+  ];
+  t.is(compareImports(LOCAL_INDEX_MODULE, INTERNAL_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(LOCAL_INDEX_MODULE, EXTERNAL_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(LOCAL_INDEX_MODULE, LOCAL_SIBLING_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(LOCAL_INDEX_MODULE, LOCAL_PARENT_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(LOCAL_INDEX_MODULE, BUILTIN_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(INTERNAL_MODULE_A, INTERNAL_MODULE_B, ORDER), FIRST);
+  t.is(compareImports(EXTERNAL_MODULE_A, INTERNAL_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(EXTERNAL_MODULE_A, INTERNAL_MODULE_B, ORDER), FIRST);
+  t.is(compareImports(EXTERNAL_MODULE_B, INTERNAL_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(EXTERNAL_MODULE_B, INTERNAL_MODULE_B, ORDER), FIRST);
+  t.is(compareImports(INTERNAL_MODULE_A, LOCAL_SIBLING_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(INTERNAL_MODULE_B, LOCAL_SIBLING_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(EXTERNAL_MODULE_A, LOCAL_SIBLING_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(EXTERNAL_MODULE_B, LOCAL_SIBLING_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(INTERNAL_MODULE_A, LOCAL_PARENT_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(INTERNAL_MODULE_B, LOCAL_PARENT_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(EXTERNAL_MODULE_A, LOCAL_PARENT_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(EXTERNAL_MODULE_B, LOCAL_PARENT_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(INTERNAL_MODULE_A, BUILTIN_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(INTERNAL_MODULE_B, BUILTIN_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(EXTERNAL_MODULE_A, BUILTIN_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(EXTERNAL_MODULE_B, BUILTIN_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(LOCAL_SIBLING_MODULE_A, LOCAL_SIBLING_MODULE_B, ORDER), FIRST);
+  t.is(compareImports(LOCAL_PARENT_MODULE_A, LOCAL_SIBLING_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(LOCAL_PARENT_MODULE_A, LOCAL_SIBLING_MODULE_B, ORDER), FIRST);
+  t.is(compareImports(LOCAL_PARENT_MODULE_B, LOCAL_SIBLING_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(LOCAL_PARENT_MODULE_B, LOCAL_SIBLING_MODULE_B, ORDER), FIRST);
+  t.is(compareImports(LOCAL_PARENT_MODULE_A, BUILTIN_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(LOCAL_PARENT_MODULE_B, BUILTIN_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(LOCAL_PARENT_MODULE_A, BUILTIN_MODULE_B, ORDER), FIRST);
+  t.is(compareImports(LOCAL_PARENT_MODULE_B, BUILTIN_MODULE_B, ORDER), FIRST);
+  t.is(compareImports(LOCAL_SIBLING_MODULE_A, BUILTIN_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(LOCAL_SIBLING_MODULE_B, BUILTIN_MODULE_A, ORDER), FIRST);
+  t.is(compareImports(LOCAL_SIBLING_MODULE_A, BUILTIN_MODULE_B, ORDER), FIRST);
+  t.is(compareImports(LOCAL_SIBLING_MODULE_B, BUILTIN_MODULE_B, ORDER), FIRST);
+});
