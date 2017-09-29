@@ -1,7 +1,7 @@
 import compareImports from './compareImports';
 
 export default (file, api, options) => {
-  const config = options && options instanceof Object ? options.sortConfig : {};
+  const config = options && options instanceof Object && options.sortConfig || {};
 
   const j = api.jscodeshift;
   const root = j(file.source);
