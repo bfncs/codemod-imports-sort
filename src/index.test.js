@@ -15,4 +15,18 @@ testChanged(
   `import fs from 'fs'; import foo from './foo'; let foo = 'bar';`
 );
 
+testChanged(
+  `
+import bar from '../bar';
+import foo from '@foo';
+import fooAbc from '@foo/abc';
+`,
+  `
+import foo from '@foo';
+import fooAbc from '@foo/abc';
+import bar from '../bar';
+`
+);
+
+testUnchanged(`import foo from '@foo/abc'`);
 testUnchanged(`let foo = 'bar';`);
