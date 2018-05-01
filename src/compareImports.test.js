@@ -3,15 +3,7 @@ import compareImports, {
   sanitizeOrder,
   compareByMatcher,
 } from './compareImports';
-
-const DEFAULT_ORDER = [
-  'builtin',
-  'external',
-  'internal',
-  'parent',
-  'sibling',
-  'index',
-];
+import { DEFAULT_ORDER } from './constants';
 
 test('sanitizeOrder should leave default order unchanged', t => {
   t.deepEqual(sanitizeOrder(DEFAULT_ORDER), DEFAULT_ORDER);
@@ -20,11 +12,22 @@ test('sanitizeOrder should leave default order unchanged', t => {
 test('sanitizeOrder should append all omitted groups', t => {
   t.deepEqual(sanitizeOrder(['external']), [
     'external',
-    ['builtin', 'internal', 'parent', 'sibling', 'index'].sort(),
+    [
+      'builtin',
+      'internal',
+      'parent',
+      'sibling',
+      'index',
+      'scoped-external',
+    ].sort(),
   ]);
   t.deepEqual(
     sanitizeOrder(['builtin', ['internal', 'parent', 'sibling', 'index']]),
-    ['builtin', ['internal', 'parent', 'sibling', 'index'].sort(), 'external'],
+    [
+      'builtin',
+      ['internal', 'parent', 'sibling', 'index'].sort(),
+      ['external', 'scoped-external'],
+    ]
   );
 });
 
@@ -128,7 +131,7 @@ test('compareImports applies custom order', t => {
   ];
   t.is(
     compareImports(LOCAL_INDEX_MODULE, LOCAL_SIBLING_MODULE_A, ORDER),
-    FIRST,
+    FIRST
   );
   t.is(compareImports(LOCAL_INDEX_MODULE, LOCAL_PARENT_MODULE_A, ORDER), FIRST);
   t.is(compareImports(LOCAL_INDEX_MODULE, INTERNAL_MODULE_A, ORDER), FIRST);
@@ -136,7 +139,7 @@ test('compareImports applies custom order', t => {
   t.is(compareImports(LOCAL_INDEX_MODULE, BUILTIN_MODULE_A, ORDER), FIRST);
   t.is(
     compareImports(LOCAL_SIBLING_MODULE_A, LOCAL_PARENT_MODULE_A, ORDER),
-    FIRST,
+    FIRST
   );
   t.is(compareImports(LOCAL_SIBLING_MODULE_A, INTERNAL_MODULE_A, ORDER), FIRST);
   t.is(compareImports(LOCAL_SIBLING_MODULE_A, EXTERNAL_MODULE_A, ORDER), FIRST);
@@ -159,7 +162,7 @@ test('compareImports applies groups in custom order', t => {
   t.is(compareImports(LOCAL_INDEX_MODULE, EXTERNAL_MODULE_A, ORDER), FIRST);
   t.is(
     compareImports(LOCAL_INDEX_MODULE, LOCAL_SIBLING_MODULE_A, ORDER),
-    FIRST,
+    FIRST
   );
   t.is(compareImports(LOCAL_INDEX_MODULE, LOCAL_PARENT_MODULE_A, ORDER), FIRST);
   t.is(compareImports(LOCAL_INDEX_MODULE, BUILTIN_MODULE_A, ORDER), FIRST);
@@ -182,23 +185,23 @@ test('compareImports applies groups in custom order', t => {
   t.is(compareImports(EXTERNAL_MODULE_B, BUILTIN_MODULE_A, ORDER), FIRST);
   t.is(
     compareImports(LOCAL_SIBLING_MODULE_A, LOCAL_SIBLING_MODULE_B, ORDER),
-    FIRST,
+    FIRST
   );
   t.is(
     compareImports(LOCAL_PARENT_MODULE_A, LOCAL_SIBLING_MODULE_A, ORDER),
-    FIRST,
+    FIRST
   );
   t.is(
     compareImports(LOCAL_PARENT_MODULE_A, LOCAL_SIBLING_MODULE_B, ORDER),
-    FIRST,
+    FIRST
   );
   t.is(
     compareImports(LOCAL_PARENT_MODULE_B, LOCAL_SIBLING_MODULE_A, ORDER),
-    FIRST,
+    FIRST
   );
   t.is(
     compareImports(LOCAL_PARENT_MODULE_B, LOCAL_SIBLING_MODULE_B, ORDER),
-    FIRST,
+    FIRST
   );
   t.is(compareImports(LOCAL_PARENT_MODULE_A, BUILTIN_MODULE_A, ORDER), FIRST);
   t.is(compareImports(LOCAL_PARENT_MODULE_B, BUILTIN_MODULE_A, ORDER), FIRST);
