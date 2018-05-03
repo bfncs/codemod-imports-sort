@@ -57,7 +57,7 @@ import './index.css';
 
 #### `--sortConfig FILE.json`
 
-Optionally you can pass the path to a JSON file with a config to define the desired order of imports. The config should resemble the config for the [`import/order`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/order.md) plugin of eslint. `groups` must be an array of `string` or [`string`]. The only allowed `string`s are: `"builtin"`, `"external"`, `"internal"`, `"parent"`, `"sibling"`, `"index"`.
+Optionally you can pass the path to a JSON file with a config to define the desired order of imports. The config should resemble the config for the [`import/order`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/order.md) plugin of eslint. `groups` must be an array of `string` or [`string`]. The only allowed `string`s are: `"builtin"`, `"external"`, `"scoped-external"`, `"internal"`, `"parent"`, `"sibling"`, `"index"`.
 
 For example to define to sort index imports first, then internal and external modules in a alphabetically sorted group and then sibling, parent and builtin modules together in a group, use this configuration:
 
