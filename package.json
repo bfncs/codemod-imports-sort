@@ -17,7 +17,8 @@
     "test": "ava",
     "test:watch": "ava --watch",
     "test:coverage": "nyc ava",
-    "prettier": "prettier --trailing-comma all --single-quote --write \"src/**/*.js\""
+    "format": "prettier --write src/**/*.{js,jsx,ts,tsx,json,md}",
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "app-root-path": "^2.0.1",
@@ -29,9 +30,11 @@
   },
   "devDependencies": {
     "ava": "^0.19.0",
+    "husky": "^0.14.3",
     "jscodeshift-ava-tester": "^1.1.1",
+    "lint-staged": "^7.0.5",
     "nyc": "^10.2.0",
-    "prettier": "^0.22.0"
+    "prettier": "^1.12.1"
   },
   "ava": {
     "files": [
@@ -52,6 +55,12 @@
         }
       ],
       "@ava/stage-4"
+    ]
+  },
+  "lint-staged": {
+    "*.{js,css,md}": [
+      "prettier --write",
+      "git add"
     ]
   }
 }

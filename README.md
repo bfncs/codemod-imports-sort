@@ -63,14 +63,14 @@ For example to define to sort index imports first, then internal and external mo
 
 ```json
 {
-    "groups": [
-        "index",
-        ["internal", "external"],
-        ["sibling", "parent", "builtin"]
-    ]
+  "groups": [
+    "index",
+    ["internal", "external"],
+    ["sibling", "parent", "builtin"]
+  ]
 }
 ```
 
 Omitted types are implicitly grouped together as the last element
 
-*Built with [jscodeshift](https://github.com/facebook/jscodeshift).*
+_Built with [jscodeshift](https://github.com/facebook/jscodeshift)._
