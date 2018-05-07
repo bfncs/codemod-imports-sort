@@ -79,7 +79,7 @@ const opts = require('nomnom')
       flag: true,
       help: 'print version and exit',
       callback: function() {
-        const requirePackage = require('../utils/requirePackage');
+        const requirePackage = require('jscodeshift/utils/requirePackage');
         return [
           `jscodeshift: ${pkg.version}`,
           ` - babel: ${require('babel-core').version}`,
