@@ -30,3 +30,13 @@ import bar from '../bar';
 
 testUnchanged(`import foo from '@foo/abc'`);
 testUnchanged(`let foo = 'bar';`);
+
+testUnchanged(`
+// first comment
+import bar from 'bar';
+
+// second comment
+import foo from 'foo';
+
+// third comment
+`);
